@@ -1,0 +1,30 @@
+.done {
+    text-decoration: line-through;
+    color: #9c9c9c;
+}
+h1 {
+    text-align: center;
+}
+body {
+    background-color: #deddff !important;
+}
+.btn-outline-light {
+    background-color: cornflowerblue !important;
+    color: white !important;
+}
+.col-1 {
+    width: 5% !important;
+}
+i, #task, #date {
+    cursor: pointer;
+}
+.dropdown {
+    display: inline-block;;
+}
+.container {
+    background: #fff;
+    padding-bottom: 2rem;
+}
+#search {
+    vertical-align: middle;
+}
