@@ -19,7 +19,7 @@
     <div class="input-group mb-3">
         <input type="text" id="input" class="from-control" placeholder="Enter task" aria-describedby="button-addon2">
         <div class="input-group-append">
-            <button class="btn btn-outline-light" type="button" id="button-addon2"> Add task</button>
+            <button class="btn btn-outline-light" type="button" id="button-addon2" onclick="addToDo()"> Add task</button>
         </div>
         <div class="row">
             <div class="col">
@@ -40,8 +40,7 @@
         <thead>
         <tr>
             <th scope="col" class="col-1">Done</th>
-            <th scope="col" class="col" id="task">Task<i id="task-i"></i> </th>
-            <th scope="col" class="col-1">Created<i id="date-i"></i></th>
+            <th scope="col" class="col" id="task">Task</th>
             <th scope="col" class="col-1">Edit</th>
             <th scope="col" class="col-1">Delete</th>
         </tr>

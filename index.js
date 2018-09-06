@@ -27,30 +27,30 @@ function addToDo() {
 
 function renderList() {
 
-    const ul = document.getElementById('list');
-    let li;
+    const table = document.getElementById('list');
+    let tr;
 
-    let button;
-
-    ul.innerHTML = '';
+    table.innerHTML = '';
 
     list.forEach((item, i) => {
-        li = document.createElement('li');
-        li.innerHTML = item.title;
-
-        button = document.createElement('button');
-        button.setAttribute('order', i);
-        button.innerHTML = Done + i;
-
-        button.addEventListener('click', (e)) => {
+        tr = document.createElement('tr');
+        let done = document.createElement('button');
+        done.setAttribute('order', i);
+        done.innerHTML = 'Done';
+        done.addEventListener('click', e=> {
 
             makeDone(e.target.getAttribute('order'))
         });
+        if(item.done) tr.className = 'done';
 
-    if(item.done) li.className = 'done';
+        let task = document.createElement('p');
 
-    li.appendChild(button);
-    ul.appendChild(li);
 
-    }
+        task.innerHTML = item.title;
+
+    tr.appendChild(done);
+    tr.appendChild(task);
+    table.appendChild(tr);
+
+    });
 }
