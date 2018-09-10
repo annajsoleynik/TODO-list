@@ -59,6 +59,13 @@ function renderList() {
         let edit = document.createElement('i');
         edit.className = 'fas fa-user-edit';
         edit.setAttribute('order', i);
+        edit.setAttribute('data-toggle', 'modal');
+        edit.setAttribute('data-target', '#myModal');
+        edit.addEventListener('click', e=> {
+            let currentIndex = e.target.getAttridute('order');
+            let editField = document.getElementById('edit-field');
+            editField.value = list[currentIndex].title
+        });
 
         td3.appendChild(edit);
         tr.appendChild(td3);
