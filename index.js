@@ -8,7 +8,7 @@ let list = [
 renderList();
 
 function makeDone(order){
-    list[order].done = true;
+    list[order].done = !list[order].done;
     renderList();
     
 }
@@ -28,29 +28,64 @@ function addToDo() {
 function renderList() {
 
     const table = document.getElementById('list');
-    let tr;
 
     table.innerHTML = '';
 
     list.forEach((item, i) => {
-        tr = document.createElement('tr');
-        let done = document.createElement('button');
+        let tr = document.createElement('tr');
+        let td1 = document.createElement('td');
+        let done = document.createElement('i');
+        done.className = 'far fa-square';
         done.setAttribute('order', i);
-        done.innerHTML = 'Done';
         done.addEventListener('click', e=> {
 
             makeDone(e.target.getAttribute('order'))
         });
-        if(item.done) tr.className = 'done';
+        if(item.done) {
+            tr.className = 'done';
+            done.className = 'fas fa-square';
+        }
 
-        let task = document.createElement('p');
+        let td2 = document.createElement('td');
 
 
-        task.innerHTML = item.title;
+        td2.innerHTML = item.title;
 
-    tr.appendChild(done);
-    tr.appendChild(task);
+        td1.appendChild(done);
+        tr.appendChild(td1);
+        tr.appendChild(td2);
+
+        let td3 = document.createElement('td');
+        let edit = document.createElement('i');
+        edit.className = 'fas fa-user-edit';
+        edit.setAttribute('order', i);
+
+        td3.appendChild(edit);
+        tr.appendChild(td3);
+
+        let td4 = document.createElement('td');
+        let del = document.createElement('i');
+        del.className = 'fas fa-trash-alt';
+        del.setAttribute('order', i);
+        del.addEventListener('click', e=> {
+            deleteTask(e.target.getAttribute('order'));
+        } );
+
+        td4.appendChild(del);
+        tr.appendChild(td4);
+
+
+
     table.appendChild(tr);
 
+
     });
+
+}
+
+function deleteTask(index) {
+    list.splice(index, 1);
+    renderList();
+
+
 }
