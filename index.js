@@ -1,28 +1,27 @@
+const editField = document.getElementById('edit-field');
 let list = [
 
   {title: 'First', done: true},
   {title: 'Second', done: false},
 ];
+let currentIndex;
 
-
-renderList();
+    renderList();
 
 function makeDone(order){
     list[order].done = !list[order].done;
     renderList();
-    
 }
-
 
 function addToDo() {
     let toDoInput = document.getElementById('input');
     let toDoInputValue = toDoInput.value;
-    list.push({title: toDoInputValue, done: false});
-
+    if (toDoInputValue) {
+        list.push({title: toDoInputValue, done: false});
+    }
     toDoInput.value = '';
     console.log(list);
     renderList();
-    
 }
 
 function renderList() {
@@ -55,15 +54,14 @@ function renderList() {
         tr.appendChild(td1);
         tr.appendChild(td2);
 
-        let td3 = document.createElement('td');
+        let td3 = document.createElement('td')
         let edit = document.createElement('i');
         edit.className = 'fas fa-user-edit';
         edit.setAttribute('order', i);
         edit.setAttribute('data-toggle', 'modal');
         edit.setAttribute('data-target', '#myModal');
         edit.addEventListener('click', e=> {
-            let currentIndex = e.target.getAttridute('order');
-            let editField = document.getElementById('edit-field');
+            currentIndex = e.target.getAttribute('order');
             editField.value = list[currentIndex].title
         });
 
@@ -95,4 +93,15 @@ function deleteTask(index) {
     renderList();
 
 
+}
+
+function saveEditedTask() {
+    list[currentIndex].title = editField.value;
+    renderList();
+
+}
+
+function clearList() {
+    list = [];
+    renderList();
 }
