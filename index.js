@@ -105,3 +105,20 @@ function clearList() {
     list = [];
     renderList();
 }
+
+function loadTasks() {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', 'https://jsonplaceholder.typicode.com/todos', true);
+    xhr.send();
+    let loadedList = [];
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            loadedList = JSON.parse(xhr.response).map(e => ({
+            ...e,
+                    done: e.completed,
+            }));
+            list = [...list, ...loadedList];
+        }
+    };
+    renderList();
+}
