@@ -1,15 +1,16 @@
 const editField = document.getElementById('edit-field');
-let list = [
-
-  {title: 'First', done: true},
-  {title: 'Second', done: false},
-];
+let list = [];
 let currentIndex;
+
+if (localStorage.getItem('tasks')) {
+    list = JSON.parse(localStorage.getItem('tasks'));
+}
 
     renderList();
 
 function makeDone(order){
     list[order].done = !list[order].done;
+    localStorage.setItem('tasks', JSON.stringify(list));
     renderList();
 }
 
@@ -20,7 +21,7 @@ function addToDo() {
         list.push({title: toDoInputValue, done: false});
     }
     toDoInput.value = '';
-    console.log(list);
+    localStorage.setItem('tasks', JSON.stringify(list));
     renderList();
 }
 
@@ -78,31 +79,25 @@ function renderList() {
 
         td4.appendChild(del);
         tr.appendChild(td4);
-
-
-
-    table.appendChild(tr);
-
-
+        table.appendChild(tr);
     });
-
 }
 
 function deleteTask(index) {
     list.splice(index, 1);
+    localStorage.setItem('tasks', JSON.stringify(list));
     renderList();
-
-
 }
 
 function saveEditedTask() {
     list[currentIndex].title = editField.value;
+    localStorage.setItem('tasks', JSON.stringify(list));
     renderList();
-
 }
 
 function clearList() {
     list = [];
+    localStorage.setItem('tasks', JSON.stringify(list));
     renderList();
 }
 
@@ -120,5 +115,6 @@ function loadTasks() {
             list = [...list, ...loadedList];
         }
     };
+    localStorage.setItem('tasks', JSON.stringify(list));
     renderList();
 }
